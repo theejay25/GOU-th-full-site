@@ -1,0 +1,645 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Edit Blog Post - GOUNI Teaching Hospital</title>
+    <meta
+      name="description"
+      content="Edit an existing blog post for GOUNI Teaching Hospital."
+    />
+    <meta name="author" content="GOUNITH" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- Place favicon.ico in the root directory -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../assets/imgs/favicon.png"
+    />
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../assets/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/vendor/animate.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins/swiper.min.css" />
+    <link rel="stylesheet" href="../assets/css/vendor/magnific-popup.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/vendor/spacing.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/plugins/odometer-theme-default.css"
+    />
+    <link rel="stylesheet" href="../assets/css/plugins/carouselTicker.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/plugins/image-reveal-hover.css"
+    />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+      /* Admin edit-blog specific styles */
+      .admin-blog__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #f8f8f8;
+        padding: 40px 0;
+      }
+      .admin-blog__card {
+        max-width: 680px;
+        margin: 0 auto;
+        background: var(--rr-common-white);
+        border-radius: 12px;
+        padding: 50px 45px;
+        box-shadow: 0px 10px 40px rgba(21, 24, 27, 0.08);
+        border: 1px solid rgba(21, 24, 27, 0.06);
+      }
+      @media (max-width: 575px) {
+        .admin-blog__card {
+          padding: 30px 20px;
+        }
+      }
+      .admin-blog__card .rr-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .admin-blog__card .get-in-touch__form-input {
+        margin-bottom: 20px;
+      }
+      .admin-blog__card .get-in-touch__form-input input,
+      .admin-blog__card .get-in-touch__form-input textarea {
+        background: #f8f8f8;
+        border: 1px solid transparent;
+      }
+      .admin-blog__card .get-in-touch__form-input input:focus,
+      .admin-blog__card .get-in-touch__form-input textarea:focus {
+        border-color: var(--rr-theme-primary);
+        background: #fff;
+      }
+      .admin-blog__logo {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .admin-blog__logo img {
+        max-width: 120px;
+      }
+      .admin-blog__title {
+        text-align: center;
+        margin-bottom: 8px;
+      }
+      .admin-blog__subtitle {
+        text-align: center;
+        font-family: var(--rr-ff-robo);
+        font-size: 16px;
+        color: var(--rr-text-body);
+        margin-bottom: 30px;
+      }
+      .admin-blog__links {
+        text-align: center;
+        margin-top: 25px;
+        font-family: var(--rr-ff-robo);
+        font-size: 16px;
+        color: var(--rr-text-body);
+      }
+      .admin-blog__links a {
+        color: var(--rr-theme-primary);
+        font-weight: 600;
+      }
+      .admin-blog__links a:hover {
+        color: var(--rr-heading-primary);
+        text-decoration: underline;
+      }
+
+      /* File upload styles */
+      .file-upload-wrapper {
+        position: relative;
+      }
+      .file-upload-wrapper input[type="file"] {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 2;
+      }
+      .file-upload-wrapper .file-label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #f8f8f8;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        padding: 14px 20px;
+        font-size: 15px;
+        color: var(--rr-text-body);
+        font-family: var(--rr-ff-robo);
+        transition: all 0.3s ease;
+      }
+      .file-upload-wrapper .file-label i {
+        font-size: 20px;
+        color: var(--rr-theme-primary);
+      }
+      .file-upload-wrapper .file-label.has-file {
+        border-color: var(--rr-theme-primary);
+        background: #fff;
+        color: var(--rr-heading-primary);
+      }
+      .file-upload-wrapper:hover .file-label {
+        border-color: var(--rr-theme-primary);
+        background: #fff;
+      }
+
+      .image-preview {
+        display: none;
+        margin-top: 12px;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(21, 24, 27, 0.08);
+      }
+      .image-preview img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+        object-fit: cover;
+      }
+      .image-preview.visible {
+        display: block;
+      }
+
+      textarea {
+        width: 100%;
+        resize: vertical;
+        min-height: 200px;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-family: var(--rr-ff-robo);
+        font-size: 15px;
+        color: var(--rr-heading-primary);
+        transition: all 0.3s ease;
+        outline: none;
+      }
+    </style>
+    <style>
+      /* Toast notification styles */
+      .toast-container {
+        position: fixed; top: 24px; right: 24px; z-index: 99999;
+        display: flex; flex-direction: column; gap: 12px;
+        pointer-events: none; max-width: 100%;
+      }
+      .toast {
+        pointer-events: auto; display: flex; align-items: flex-start; gap: 14px;
+        background: #1a1d23; border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 12px; padding: 16px 20px; min-width: 320px; max-width: 440px;
+        box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+        animation: toastSlideIn 0.35s cubic-bezier(0.16,1,0.3,1);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .toast.removing { opacity: 0; transform: translateX(60px); }
+      .toast__icon { flex: 0 0 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+      .toast--success .toast__icon { background: rgba(34,197,94,0.15); color: #22c55e; }
+      .toast--error .toast__icon { background: rgba(239,68,68,0.15); color: #ef4444; }
+      .toast--info .toast__icon { background: rgba(59,130,246,0.15); color: #3b82f6; }
+      .toast--warning .toast__icon { background: rgba(234,179,8,0.15); color: #eab308; }
+      .toast__body { flex: 1; min-width: 0; }
+      .toast__title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; font-family: sans-serif; }
+      .toast__message { font-size: 14px; font-weight: 500; line-height: 1.5; color: #f1ead9; font-family: sans-serif; word-wrap: break-word; }
+      .toast__close { flex: 0 0 24px; height: 24px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; font-size: 16px; padding: 0; border-radius: 4px; }
+      .toast__close:hover { color: #fff; }
+      @keyframes toastSlideIn { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+      @media (max-width: 520px) { .toast-container { top: 16px; right: 16px; left: 16px; } .toast { min-width: 0; max-width: 100%; padding: 14px 16px; } }
+    </style>
+  </head>
+
+  <body class="body-1">
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- preloader start -->
+    <div class="status" id="status"></div>
+    <div id="preloader" data-preloader="active" data-loaded="doted">
+      <div class="preloader-close">x</div>
+      <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
+    </div>
+    <div class="preloader" data-preloader="deactive" data-loaded="progress">
+      <div class="preloader-close">x</div>
+      <div class="wrapper w-100 text-center">
+        <div id="progress-bar" class="preloader-text" data-text="SOMA"></div>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+      </div>
+    </div>
+    <!-- preloader end -->
+
+    <div class="loading-form">
+      <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- Backtotop start -->
+    <div id="scroll-percentage">
+      <span id="scroll-percentage-value"></span>
+    </div>
+    <!-- Backtotop end -->
+
+    <!-- cursorAnimation start -->
+    <div class="cursor-wrapper relative">
+      <div class="cursor"></div>
+      <div class="cursor-follower"></div>
+    </div>
+    <!-- cursorAnimation end -->
+
+    <main>
+      <div class="admin-blog__wrapper">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-8 col-xl-7">
+              <div class="admin-blog__card">
+                <div class="admin-blog__logo">
+                  <img src="../assets/logo.png" alt="GOUNI Teaching Hospital" />
+                </div>
+                <h3 class="admin-blog__title">Edit Blog Post</h3>
+                <p class="admin-blog__subtitle">
+                  Update your existing blog post. Modify the title, description,
+                  article content, or replace the featured image.
+                </p>
+
+                <div
+                  class="status"
+                  id="status"
+                  style="margin-bottom: 20px"
+                ></div>
+
+                <form id="blog-form" novalidate>
+                  <input type="hidden" id="blogId" name="blogId" />
+
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="get-in-touch__form-input">
+                        <input
+                          type="text"
+                          name="title"
+                          id="title"
+                          placeholder="Blog Title *"
+                          autocapitalize="off"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="get-in-touch__form-input">
+                        <textarea
+                          name="shortDescription"
+                          id="shortDescription"
+                          placeholder="Short description for listing preview (max 300 chars) *"
+                          autocapitalize="off"
+                          maxlength="300"
+                          rows="3"
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="get-in-touch__form-input">
+                        <textarea
+                          name="fullArticle"
+                          id="fullArticle"
+                          placeholder="Write your full article content here... *"
+                          autocapitalize="off"
+                          rows="12"
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="get-in-touch__form-input">
+                        <div class="file-upload-wrapper">
+                          <input
+                            type="file"
+                            id="image"
+                            name="image"
+                            accept="image/jpeg,image/png,image/webp,image/gif"
+                          />
+                          <div class="file-label" id="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span id="file-name"
+                              >Replace featured image (optional)</span
+                            >
+                          </div>
+                        </div>
+                        <div class="image-preview" id="image-preview">
+                          <img id="preview-img" alt="Image preview" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <button type="submit" class="rr-btn" id="submit-btn">
+                        <span class="btn-wrap">
+                          <span class="text-one">Update Blog Post</span>
+                          <span class="text-two">Update Blog Post</span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="admin-blog__links">
+                  <a href="dashboard.html"
+                    ><i class="fas fa-arrow-left"></i> Back to Dashboard</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JS here -->
+    <script src="../assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/plugins/waypoints.min.js"></script>
+    <script src="../assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/plugins/meanmenu.min.js"></script>
+    <script src="../assets/js/plugins/odometer.min.js"></script>
+    <script src="../assets/js/plugins/swiper.min.js"></script>
+    <script src="../assets/js/plugins/wow.js"></script>
+    <script src="../assets/js/vendor/magnific-popup.min.js"></script>
+    <script src="../assets/js/vendor/type.js"></script>
+    <script src="../assets/js/plugins/nice-select.min.js"></script>
+    <script src="../assets/js/vendor/jquery-ui.min.js"></script>
+    <script src="../assets/js/vendor/jquery.appear.js"></script>
+    <script src="../assets/js/plugins/parallax.min.js"></script>
+    <script src="../assets/js/plugins/parallax-scroll.js"></script>
+    <script src="../assets/js/plugins/isotope.pkgd.min.js"></script>
+    <script src="../assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <script src="../assets/js/plugins/gsap.min.js"></script>
+    <script src="../assets/js/plugins/ScrollTrigger.min.js"></script>
+    <script src="../assets/js/plugins/SplitText.js"></script>
+    <script src="../assets/js/plugins/tween-max.min.js"></script>
+    <script src="../assets/js/plugins/draggable.min.js"></script>
+    <script src="../assets/js/plugins/jquery.carouselTicker.js"></script>
+    <script src="../assets/js/vendor/ajax-form.js"></script>
+    <script src="../assets/js/plugins/TextPlugin.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/plugins/magiccursor.js"></script>
+    <script src="../assets/js/image-reveal-hover.js"></script>
+
+    <script src="assets/api.js"></script>
+    <script>
+      (function () {
+        const form = document.getElementById("blog-form");
+        const submitBtn = document.getElementById("submit-btn");
+        const statusEl = document.getElementById("status");
+        const imageInput = document.getElementById("image");
+        const fileLabel = document.getElementById("file-label");
+        const fileName = document.getElementById("file-name");
+        const imagePreview = document.getElementById("image-preview");
+        const previewImg = document.getElementById("preview-img");
+        const blogIdInput = document.getElementById("blogId");
+
+        // ─── Helper: force logout by clearing tokens ──────────────
+        function forceLogout() {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          window.location.href = "login.html";
+        }
+
+        // Check auth — validate token server-side
+        const accessToken = localStorage.getItem("accessToken");
+        if (!accessToken) {
+          showStatus(
+            statusEl,
+            "error",
+            "You must be signed in to edit a blog post.",
+          );
+          submitBtn.disabled = true;
+          // Redirect after a brief delay
+          setTimeout(() => forceLogout(), 2000);
+        } else {
+          // Validate token with server
+          (async function () {
+            try {
+              const res = await fetch(`${API_BASE}/auth/profile`, {
+                headers: { Authorization: `Bearer ${accessToken}` },
+              });
+              if (!res.ok) {
+                throw new Error("Token invalid");
+              }
+            } catch (err) {
+              showStatus(
+                statusEl,
+                "error",
+                "Session expired. Redirecting to login...",
+              );
+              submitBtn.disabled = true;
+              setTimeout(() => forceLogout(), 2000);
+            }
+          })();
+        }
+
+        // ─── Load existing blog data ─────────────────────────────────
+        async function loadBlog() {
+          const params = new URLSearchParams(window.location.search);
+          const blogId = params.get("id");
+          if (!blogId) {
+            showStatus(
+              statusEl,
+              "error",
+              "No blog post ID provided. Please select a post to edit from the dashboard.",
+            );
+            submitBtn.disabled = true;
+            return;
+          }
+
+          blogIdInput.value = blogId;
+
+          try {
+            const response = await getJSON(`/blogs/${blogId}`);
+            const blog = response.data;
+
+            if (!blog) {
+              throw new Error("Blog post not found");
+            }
+
+            // Pre-populate fields
+            document.getElementById("title").value = blog.title || "";
+            document.getElementById("shortDescription").value =
+              blog.shortDescription || "";
+            document.getElementById("fullArticle").value = blog.content || "";
+
+            // Show existing image preview
+            if (blog.image_url) {
+              previewImg.src = blog.image_url;
+              imagePreview.classList.add("visible");
+              fileName.textContent = "Current image (select a file to replace)";
+              fileLabel.classList.add("has-file");
+            }
+          } catch (err) {
+            showStatus(
+              statusEl,
+              "error",
+              "Failed to load blog post: " + err.message,
+            );
+            submitBtn.disabled = true;
+          }
+        }
+
+        // Load blog data on page load
+        loadBlog();
+
+        // Image preview (for new image selection)
+        imageInput.addEventListener("change", function () {
+          const file = this.files[0];
+          if (file) {
+            fileName.textContent = file.name;
+            fileLabel.classList.add("has-file");
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              previewImg.src = e.target.result;
+              imagePreview.classList.add("visible");
+            };
+            reader.readAsDataURL(file);
+          } else {
+            // If no file selected, keep showing existing image
+            if (!blogIdInput.value) {
+              fileName.textContent = "Replace featured image (optional)";
+              fileLabel.classList.remove("has-file");
+              imagePreview.classList.remove("visible");
+            }
+          }
+        });
+
+        // ─── Submit (PUT) ────────────────────────────────────────────
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const blogId = blogIdInput.value;
+          if (!blogId) {
+            showStatus(
+              statusEl,
+              "error",
+              "Missing blog post ID. Please go back and try again.",
+            );
+            return;
+          }
+
+          const title = document.getElementById("title").value.trim();
+          const shortDescription = document
+            .getElementById("shortDescription")
+            .value.trim();
+          const fullArticle = document
+            .getElementById("fullArticle")
+            .value.trim();
+          const imageFile = imageInput.files[0];
+
+          if (!title) {
+            showToast("error", "Title is required.");
+            document.getElementById("title").focus();
+            return;
+          }
+          if (!shortDescription) {
+            showToast("error", "Short description is required.");
+            document.getElementById("shortDescription").focus();
+            return;
+          }
+          if (!fullArticle) {
+            showToast("error", "Full article content is required.");
+            document.getElementById("fullArticle").focus();
+            return;
+          }
+
+          // Validate image if a new one is selected
+          if (imageFile) {
+            const allowedTypes = [
+              "image/jpeg",
+              "image/png",
+              "image/webp",
+              "image/gif",
+            ];
+            if (!allowedTypes.includes(imageFile.type)) {
+              showStatus(
+                statusEl,
+                "error",
+                "Only image files (JPG, PNG, WebP, GIF) are allowed.",
+              );
+              return;
+            }
+
+            const maxSize = 5 * 1024 * 1024;
+            if (imageFile.size > maxSize) {
+              showStatus(
+                statusEl,
+                "error",
+                "Image is too large. Maximum size is 5MB.",
+              );
+              return;
+            }
+          }
+
+          hideStatus(statusEl);
+
+          // Loading state on submit button
+          const textOne = submitBtn.querySelector(".text-one");
+          const textTwo = submitBtn.querySelector(".text-two");
+          submitBtn.disabled = true;
+          textOne.textContent = "Updating...";
+          textTwo.textContent = "Updating...";
+
+          try {
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("shortDescription", shortDescription);
+            formData.append("content", fullArticle);
+            if (imageFile) {
+              formData.append("image", imageFile);
+            }
+
+            const data = await putFormData(
+              `/blogs/${blogId}`,
+              formData,
+              accessToken,
+            );
+
+            showStatus(
+              statusEl,
+              "success",
+              data.message || "Blog post updated successfully! Redirecting...",
+            );
+            textOne.textContent = "Updated!";
+            textTwo.textContent = "Updated!";
+
+            // Redirect back to dashboard after 1.5 seconds
+            setTimeout(() => {
+              window.location.href = "dashboard.html";
+            }, 1500);
+          } catch (err) {
+            showToast("error", err.message);
+            submitBtn.disabled = false;
+            textOne.textContent = "Update Blog Post";
+            textTwo.textContent = "Update Blog Post";
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

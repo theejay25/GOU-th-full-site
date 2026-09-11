@@ -1,0 +1,524 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Admin Register - GOUNI Teaching Hospital</title>
+    <meta
+      name="description"
+      content="Admin registration page for GOUNI Teaching Hospital portal. Register to manage hospital content and services."
+    />
+    <meta name="author" content="GOUNITH" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://www.gounith.org/admin/register.html" />
+    <!-- Place favicon.ico in the root directory -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../assets/imgs/favicon.png"
+    />
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../assets/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/vendor/animate.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins/swiper.min.css" />
+    <link rel="stylesheet" href="../assets/css/vendor/magnific-popup.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/vendor/spacing.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/plugins/odometer-theme-default.css"
+    />
+    <link rel="stylesheet" href="../assets/css/plugins/carouselTicker.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/plugins/image-reveal-hover.css"
+    />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+      /* Admin-specific styles */
+      .admin-register__card {
+        max-width: 580px;
+        margin: 0 auto;
+        background: var(--rr-common-white);
+        border-radius: 12px;
+        padding: 50px 45px;
+        box-shadow: 0px 10px 40px rgba(21, 24, 27, 0.08);
+        border: 1px solid rgba(21, 24, 27, 0.06);
+      }
+      @media (max-width: 575px) {
+        .admin-register__card {
+          padding: 30px 20px;
+        }
+      }
+      .admin-register__card .rr-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .admin-register__card .get-in-touch__form-input {
+        margin-bottom: 20px;
+      }
+      .admin-register__card .get-in-touch__form-input input {
+        background: #f8f8f8;
+        border: 1px solid transparent;
+      }
+      .admin-register__card .get-in-touch__form-input input:focus {
+        border-color: var(--rr-theme-primary);
+        background: #fff;
+      }
+      .admin-register__divider {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin: 30px 0 20px;
+      }
+      .admin-register__divider::before,
+      .admin-register__divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(21, 24, 27, 0.1);
+      }
+      .admin-register__divider span {
+        font-family: var(--rr-ff-robo);
+        font-size: 14px;
+        color: var(--rr-text-body);
+        white-space: nowrap;
+      }
+      .admin-register__login-link {
+        text-align: center;
+        margin-top: 25px;
+        font-family: var(--rr-ff-robo);
+        font-size: 16px;
+        color: var(--rr-text-body);
+      }
+      .admin-register__login-link a {
+        color: var(--rr-theme-primary);
+        font-weight: 600;
+      }
+      .admin-register__login-link a:hover {
+        color: var(--rr-heading-primary);
+        text-decoration: underline;
+      }
+      .admin-register__logo {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .admin-register__logo img {
+        max-width: 120px;
+      }
+      .admin-register__title {
+        text-align: center;
+        margin-bottom: 8px;
+      }
+      .admin-register__subtitle {
+        text-align: center;
+        font-family: var(--rr-ff-robo);
+        font-size: 16px;
+        color: var(--rr-text-body);
+        margin-bottom: 30px;
+      }
+      .password-wrapper {
+        position: relative;
+      }
+      .password-wrapper .toggle-password {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: var(--rr-text-body);
+        font-size: 18px;
+        background: transparent;
+        border: none;
+        padding: 0;
+        z-index: 2;
+      }
+      .password-wrapper .toggle-password:hover {
+        color: var(--rr-theme-primary);
+      }
+    </style>
+    <style>
+      /* Toast notification styles */
+      .toast-container {
+        position: fixed; top: 24px; right: 24px; z-index: 99999;
+        display: flex; flex-direction: column; gap: 12px;
+        pointer-events: none; max-width: 100%;
+      }
+      .toast {
+        pointer-events: auto; display: flex; align-items: flex-start; gap: 14px;
+        background: #1a1d23; border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 12px; padding: 16px 20px; min-width: 320px; max-width: 440px;
+        box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+        animation: toastSlideIn 0.35s cubic-bezier(0.16,1,0.3,1);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .toast.removing { opacity: 0; transform: translateX(60px); }
+      .toast__icon { flex: 0 0 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+      .toast--success .toast__icon { background: rgba(34,197,94,0.15); color: #22c55e; }
+      .toast--error .toast__icon { background: rgba(239,68,68,0.15); color: #ef4444; }
+      .toast--info .toast__icon { background: rgba(59,130,246,0.15); color: #3b82f6; }
+      .toast--warning .toast__icon { background: rgba(234,179,8,0.15); color: #eab308; }
+      .toast__body { flex: 1; min-width: 0; }
+      .toast__title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; font-family: sans-serif; }
+      .toast__message { font-size: 14px; font-weight: 500; line-height: 1.5; color: #f1ead9; font-family: sans-serif; word-wrap: break-word; }
+      .toast__close { flex: 0 0 24px; height: 24px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; font-size: 16px; padding: 0; border-radius: 4px; }
+      .toast__close:hover { color: #fff; }
+      @keyframes toastSlideIn { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+      @media (max-width: 520px) { .toast-container { top: 16px; right: 16px; left: 16px; } .toast { min-width: 0; max-width: 100%; padding: 14px 16px; } }
+    </style>
+  </head>
+
+  <body class="body-1">
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- preloader start -->
+    <!-- style 1 -->
+
+    <div class="status" id="status"></div>
+    <div id="preloader" data-preloader="active" data-loaded="doted">
+      <div class="preloader-close">x</div>
+      <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
+    </div>
+
+    <!-- style 2 -->
+    <div class="preloader" data-preloader="deactive" data-loaded="progress">
+      <div class="preloader-close">x</div>
+      <div class="wrapper w-100 text-center">
+        <div id="progress-bar" class="preloader-text" data-text="SOMA"></div>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+      </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- preloader start -->
+    <div class="loading-form">
+      <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- Backtotop start -->
+    <div id="scroll-percentage">
+      <span id="scroll-percentage-value"></span>
+    </div>
+    <!-- Backtotop end -->
+
+    <!-- cursorAnimation start -->
+    <div class="cursor-wrapper relative">
+      <div class="cursor"></div>
+      <div class="cursor-follower"></div>
+    </div>
+    <!-- cursorAnimation end -->
+
+    <!-- Offcanvas area start -->
+    <!-- Offcanvas area End -->
+
+    <main>
+      <!-- Admin Register Form area start -->
+      <section class="contact-us section-space">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="admin-register__card">
+                <div class="admin-register__logo">
+                  <img src="../assets/logo.png" alt="GOUNI Teaching Hospital" />
+                </div>
+                <h3 class="admin-register__title">Create Admin Account</h3>
+                <p class="admin-register__subtitle">
+                  Register to manage hospital content and services
+                </p>
+
+                <form id="adminRegisterForm" novalidate>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="get-in-touch__form-input">
+                        <input
+                          type="text"
+                          name="fullname"
+                          id="name"
+                          placeholder="Full Name *"
+                          autocapitalize="off"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="get-in-touch__form-input">
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          placeholder="Email Address *"
+                          autocapitalize="off"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="get-in-touch__form-input">
+                        <div class="password-wrapper">
+                          <input
+                            type="password"
+                            name="password"
+                            id="regPassword"
+                            placeholder="Password *"
+                            required
+                          />
+                          <button
+                            type="button"
+                            class="toggle-password"
+                            onclick="
+                              togglePasswordVisibility('regPassword', this)
+                            "
+                            title="Toggle password visibility"
+                            aria-label="Toggle password visibility"
+                          >
+                            <i class="far fa-eye"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="get-in-touch__form-input">
+                        <div class="password-wrapper">
+                          <input
+                            type="password"
+                            name="confirmPassword"
+                            id="regConfirmPassword"
+                            placeholder="Confirm Password *"
+                            required
+                          />
+                          <button
+                            type="button"
+                            class="toggle-password"
+                            onclick="
+                              togglePasswordVisibility(
+                                'regConfirmPassword',
+                                this,
+                              )
+                            "
+                            title="Toggle password visibility"
+                            aria-label="Toggle password visibility"
+                          >
+                            <i class="far fa-eye"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="rr-btn" id="reg-submit-btn">
+                        <span class="btn-wrap">
+                          <span class="text-one">Create Account</span>
+                          <span class="text-two">Create Account</span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="admin-register__divider">
+                  <span>OR</span>
+                </div>
+
+                <div class="admin-register__login-link">
+                  Already have an account?
+                  <a href="login.html">Sign in here</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Admin Register Form area end -->
+    </main>
+
+    <!-- JS here -->
+    <script src="../assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/plugins/waypoints.min.js"></script>
+    <script src="../assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/plugins/meanmenu.min.js"></script>
+    <script src="../assets/js/plugins/odometer.min.js"></script>
+    <script src="../assets/js/plugins/swiper.min.js"></script>
+    <script src="../assets/js/plugins/wow.js"></script>
+    <script src="../assets/js/vendor/magnific-popup.min.js"></script>
+    <script src="../assets/js/vendor/type.js"></script>
+    <script src="../assets/js/plugins/nice-select.min.js"></script>
+    <script src="../assets/js/vendor/jquery-ui.min.js"></script>
+    <script src="../assets/js/vendor/jquery.appear.js"></script>
+    <script src="../assets/js/plugins/parallax.min.js"></script>
+    <script src="../assets/js/plugins/parallax-scroll.js"></script>
+    <script src="../assets/js/plugins/isotope.pkgd.min.js"></script>
+    <script src="../assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <script src="../assets/js/plugins/gsap.min.js"></script>
+    <script src="../assets/js/plugins/ScrollTrigger.min.js"></script>
+    <script src="../assets/js/plugins/SplitText.js"></script>
+    <script src="../assets/js/plugins/tween-max.min.js"></script>
+    <script src="../assets/js/plugins/draggable.min.js"></script>
+    <script src="../assets/js/plugins/jquery.carouselTicker.js"></script>
+    <script src="../assets/js/vendor/ajax-form.js"></script>
+    <script src="../assets/js/plugins/TextPlugin.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/plugins/magiccursor.js"></script>
+    <script src="../assets/js/image-reveal-hover.js"></script>
+
+<script src="assets/api.js"></script>
+    <script>
+      // ─── Self-contained toast function (works independently of api.js) ───
+      function registerToast(type, message) {
+        // Create container if not exists
+        var c = document.getElementById("toast-container");
+        if (!c) {
+          c = document.createElement("div");
+          c.id = "toast-container";
+          c.className = "toast-container";
+          document.body.appendChild(c);
+        }
+
+        var t = document.createElement("div");
+        t.className = "toast toast--" + type;
+
+        var icon = "";
+        if (type === "success") icon = '<i class="fas fa-check"></i>';
+        else if (type === "error") icon = '<i class="fas fa-times"></i>';
+        else icon = '<i class="fas fa-info"></i>';
+
+        // Escape HTML to prevent XSS
+        var msg = String(message || "").replace(/&/g, "&" + "amp;").replace(/</g, "&" + "lt;").replace(/>/g, "&" + "gt;").replace(/"/g, "&" + "quot;").replace(/'/g, "&#" + "039;");
+
+        t.innerHTML =
+          '<div class="toast__icon">' + icon + '</div>' +
+          '<div class="toast__body"><div class="toast__message">' + msg + '</div></div>' +
+          '<button class="toast__close" onclick="(function(el){el.classList.add(\'removing\');setTimeout(function(){if(el.parentNode)el.remove()},300)})(this.closest(\'.toast\'))"><i class="fas fa-times"></i></button>';
+
+        c.appendChild(t);
+
+        var ad = setTimeout(function () {
+          if (t.parentNode) {
+            t.classList.add("removing");
+            setTimeout(function () { if (t.parentNode) t.remove(); }, 300);
+          }
+        }, 4500);
+
+        t.addEventListener("mouseenter", function () { clearTimeout(ad); });
+        t.addEventListener("mouseleave", function () {
+          if (!t.classList.contains("removing")) {
+            setTimeout(function () {
+              if (t.parentNode && !t.classList.contains("removing")) {
+                t.classList.add("removing");
+                setTimeout(function () { if (t.parentNode) t.remove(); }, 300);
+              }
+            }, 4500);
+          }
+        });
+      }
+
+      // ─── Override the api.js showToast to use our local version ───
+      var originalShowToast = window.showToast;
+      window.showToast = registerToast;
+
+      // Toggle password visibility
+      function togglePasswordVisibility(inputId, btn) {
+        const input = document.getElementById(inputId);
+        const icon = btn.querySelector("i");
+        if (input.type === "password") {
+          input.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        } else {
+          input.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+        }
+      }
+
+      (function () {
+        const form = document.getElementById("adminRegisterForm");
+        const statusEl = document.getElementById("status");
+        const submitBtn = document.getElementById("reg-submit-btn");
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const fullname = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("regPassword").value;
+          const confirmPassword =
+            document.getElementById("regConfirmPassword").value;
+
+          // Client-side validation
+          if (!fullname || !email || !password || !confirmPassword) {
+            showToast("error", "Please fill in all required fields.");
+            return;
+          }
+
+          if (password.length < 6) {
+            showToast("error", "Password must be at least 6 characters long.");
+            return;
+          }
+
+          if (password !== confirmPassword) {
+            showToast("error", "Passwords do not match!");
+            return;
+          }
+
+          // Hide any previous status
+          hideStatus(statusEl);
+
+          // Disable button and show loading state (preserve the .btn-wrap spans)
+          submitBtn.disabled = true;
+          submitBtn.querySelector(".text-one").textContent =
+            "Creating account...";
+          submitBtn.querySelector(".text-two").textContent =
+            "Creating account...";
+
+          try {
+            const data = await postJSON("/auth/register", {
+              name: fullname,
+              email,
+              password,
+            });
+
+const successMsg =
+              data.message ||
+              "Account created! Please check your email to verify your account.";
+            showToast("success", successMsg);
+            alert(successMsg);
+            // Clear the form and keep user on the page so they can check email
+            form.reset();
+          } catch (err) {
+            console.error("Register error:", err);
+            const msg =
+              err && err.message
+                ? err.message
+                : "Registration failed. Please try again.";
+            showToast("error", msg);
+            alert(msg);
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.querySelector(".text-one").textContent = "Create Account";
+            submitBtn.querySelector(".text-two").textContent = "Create Account";
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

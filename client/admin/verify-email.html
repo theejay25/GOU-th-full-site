@@ -1,0 +1,517 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Verify Email - GOUNI Teaching Hospital</title>
+    <meta
+      name="description"
+      content="Verify your email address for GOUNI Teaching Hospital admin portal."
+    />
+    <meta name="author" content="GOUNITH" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link
+      rel="canonical"
+      href="https://www.gounith.org/admin/verify-email.html"
+    />
+    <!-- Place favicon.ico in the root directory -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../assets/imgs/favicon.png"
+    />
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../assets/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/vendor/animate.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins/swiper.min.css" />
+    <link rel="stylesheet" href="../assets/css/vendor/magnific-popup.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/vendor/spacing.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/plugins/odometer-theme-default.css"
+    />
+    <link rel="stylesheet" href="../assets/css/plugins/carouselTicker.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/plugins/image-reveal-hover.css"
+    />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+      /* Admin verify-email styles — consistent with login/register pages */
+      .admin-verify__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #f8f8f8;
+        padding: 40px 0;
+      }
+      .admin-verify__card {
+        max-width: 520px;
+        margin: 0 auto;
+        background: var(--rr-common-white);
+        border-radius: 12px;
+        padding: 50px 45px;
+        box-shadow: 0px 10px 40px rgba(21, 24, 27, 0.08);
+        border: 1px solid rgba(21, 24, 27, 0.06);
+        text-align: center;
+      }
+      @media (max-width: 575px) {
+        .admin-verify__card {
+          padding: 30px 20px;
+        }
+      }
+      .admin-verify__logo {
+        margin-bottom: 24px;
+      }
+      .admin-verify__logo img {
+        max-width: 100px;
+      }
+      .admin-verify__title {
+        margin-bottom: 8px;
+      }
+      .admin-verify__subtitle {
+        font-family: var(--rr-ff-robo);
+        font-size: 16px;
+        color: var(--rr-text-body);
+        margin-bottom: 28px;
+      }
+
+      /* Checking spinner */
+      .admin-verify__spinner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 0;
+      }
+      .admin-verify__spinner .spinner-icon {
+        width: 56px;
+        height: 56px;
+        border: 5px solid rgba(21, 24, 27, 0.08);
+        border-top-color: var(--rr-theme-primary);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .admin-verify__spinner p {
+        font-family: var(--rr-ff-robo);
+        font-size: 16px;
+        color: var(--rr-text-body);
+        margin: 0;
+      }
+
+      /* Result icon */
+      .admin-verify__icon {
+        font-size: 60px;
+        margin-bottom: 16px;
+      }
+      .admin-verify__icon.success {
+        color: #22c55e;
+      }
+      .admin-verify__icon.error {
+        color: #ef4444;
+      }
+
+      .admin-verify__result-title {
+        margin-bottom: 8px;
+      }
+      .admin-verify__result-lede {
+        font-family: var(--rr-ff-robo);
+        font-size: 16px;
+        color: var(--rr-text-body);
+        margin-bottom: 24px;
+      }
+
+      .admin-verify__result-lede a {
+        color: var(--rr-theme-primary);
+        font-weight: 600;
+      }
+      .admin-verify__result-lede a:hover {
+        color: var(--rr-heading-primary);
+        text-decoration: underline;
+      }
+
+      .admin-verify__cta .rr-btn {
+        display: inline-flex;
+      }
+
+      /* Manual token form */
+      .admin-verify__manual {
+        text-align: left;
+        margin-top: 10px;
+      }
+      .admin-verify__manual .get-in-touch__form-input {
+        margin-bottom: 20px;
+      }
+      .admin-verify__manual .get-in-touch__form-input input {
+        background: #f8f8f8;
+        border: 1px solid transparent;
+      }
+      .admin-verify__manual .get-in-touch__form-input input:focus {
+        border-color: var(--rr-theme-primary);
+        background: #fff;
+      }
+      .admin-verify__manual .rr-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .admin-verify__divider {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin: 24px 0 20px;
+      }
+      .admin-verify__divider::before,
+      .admin-verify__divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(21, 24, 27, 0.1);
+      }
+      .admin-verify__divider span {
+        font-family: var(--rr-ff-robo);
+        font-size: 14px;
+        color: var(--rr-text-body);
+        white-space: nowrap;
+      }
+
+      .admin-verify__manual-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-align: center;
+        color: var(--rr-heading-primary);
+      }
+
+      /* Status message */
+      .status {
+        font-family: var(--rr-ff-robo);
+        font-size: 14px;
+        padding: 10px 16px;
+        border-radius: 8px;
+        margin-top: 12px;
+        display: none;
+      }
+      .status.visible {
+        display: block;
+      }
+      .status.success {
+        background: #dcfce7;
+        color: #166534;
+      }
+      .status.error {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+    </style>
+    <style>
+      /* Toast notification styles */
+      .toast-container {
+        position: fixed; top: 24px; right: 24px; z-index: 99999;
+        display: flex; flex-direction: column; gap: 12px;
+        pointer-events: none; max-width: 100%;
+      }
+      .toast {
+        pointer-events: auto; display: flex; align-items: flex-start; gap: 14px;
+        background: #1a1d23; border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 12px; padding: 16px 20px; min-width: 320px; max-width: 440px;
+        box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+        animation: toastSlideIn 0.35s cubic-bezier(0.16,1,0.3,1);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .toast.removing { opacity: 0; transform: translateX(60px); }
+      .toast__icon { flex: 0 0 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+      .toast--success .toast__icon { background: rgba(34,197,94,0.15); color: #22c55e; }
+      .toast--error .toast__icon { background: rgba(239,68,68,0.15); color: #ef4444; }
+      .toast--info .toast__icon { background: rgba(59,130,246,0.15); color: #3b82f6; }
+      .toast--warning .toast__icon { background: rgba(234,179,8,0.15); color: #eab308; }
+      .toast__body { flex: 1; min-width: 0; }
+      .toast__title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; font-family: sans-serif; }
+      .toast__message { font-size: 14px; font-weight: 500; line-height: 1.5; color: #f1ead9; font-family: sans-serif; word-wrap: break-word; }
+      .toast__close { flex: 0 0 24px; height: 24px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; font-size: 16px; padding: 0; border-radius: 4px; }
+      .toast__close:hover { color: #fff; }
+      @keyframes toastSlideIn { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+      @media (max-width: 520px) { .toast-container { top: 16px; right: 16px; left: 16px; } .toast { min-width: 0; max-width: 100%; padding: 14px 16px; } }
+    </style>
+  </head>
+
+  <body class="body-1">
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- preloader start -->
+    <div id="preloader" data-preloader="active" data-loaded="doted">
+      <div class="preloader-close">x</div>
+      <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
+    </div>
+    <div class="preloader" data-preloader="deactive" data-loaded="progress">
+      <div class="preloader-close">x</div>
+      <div class="wrapper w-100 text-center">
+        <div id="progress-bar" class="preloader-text" data-text="SOMA"></div>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+      </div>
+    </div>
+    <!-- preloader end -->
+
+    <div class="loading-form">
+      <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- Backtotop start -->
+    <div id="scroll-percentage">
+      <span id="scroll-percentage-value"></span>
+    </div>
+    <!-- Backtotop end -->
+
+    <!-- cursorAnimation start -->
+    <div class="cursor-wrapper relative">
+      <div class="cursor"></div>
+      <div class="cursor-follower"></div>
+    </div>
+    <!-- cursorAnimation end -->
+
+    <main>
+      <div class="admin-verify__wrapper">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="admin-verify__card">
+                <div class="admin-verify__logo">
+                  <img src="../assets/logo.png" alt="GOUNI Teaching Hospital" />
+                </div>
+                <h3 class="admin-verify__title">Email Verification</h3>
+                <p class="admin-verify__subtitle">
+                  Verifying your email address for admin access
+                </p>
+
+                <!-- Checking / loading state -->
+                <div
+                  id="checking-view"
+                  class="admin-verify__spinner"
+                  style="display: none"
+                >
+                  <div class="spinner-icon"></div>
+                  <p>Verifying your email&hellip;</p>
+                </div>
+
+                <!-- Result state (success or failure) -->
+                <div id="result-view" style="display: none">
+                  <div id="result-icon" class="admin-verify__icon"></div>
+                  <h4 id="result-title" class="admin-verify__result-title"></h4>
+                  <p id="result-lede" class="admin-verify__result-lede"></p>
+                  <div class="admin-verify__cta">
+                    <a id="cta-btn" href="login.html" class="rr-btn">
+                      <span class="btn-wrap">
+                        <span class="text-one">Sign In</span>
+                        <span class="text-two">Sign In</span>
+                      </span>
+                    </a>
+                  </div>
+                  <div class="status" id="status"></div>
+                </div>
+
+                <!-- No-token fallback: manual token entry -->
+                <div id="no-token-view" style="display: none">
+                  <div class="admin-verify__manual">
+                    <p class="admin-verify__manual-title">
+                      Paste your verification token
+                    </p>
+                    <form id="manual-form">
+                      <div class="get-in-touch__form-input">
+                        <input
+                          type="text"
+                          id="manual-token"
+                          placeholder="Paste your verification token here *"
+                          required
+                        />
+                      </div>
+                      <button type="submit" class="rr-btn">
+                        <span class="btn-wrap">
+                          <span class="text-one">Verify Email</span>
+                          <span class="text-two">Verify Email</span>
+                        </span>
+                      </button>
+                    </form>
+                    <div class="status" id="manual-status"></div>
+                  </div>
+
+                  <div class="admin-verify__divider">
+                    <span>OR</span>
+                  </div>
+
+                  <div
+                    class="admin-verify__result-lede"
+                    style="margin-bottom: 0"
+                  >
+                    <a href="login.html">Back to sign in</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JS here -->
+    <script src="../assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/plugins/waypoints.min.js"></script>
+    <script src="../assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/plugins/meanmenu.min.js"></script>
+    <script src="../assets/js/plugins/odometer.min.js"></script>
+    <script src="../assets/js/plugins/swiper.min.js"></script>
+    <script src="../assets/js/plugins/wow.js"></script>
+    <script src="../assets/js/vendor/magnific-popup.min.js"></script>
+    <script src="../assets/js/vendor/type.js"></script>
+    <script src="../assets/js/plugins/nice-select.min.js"></script>
+    <script src="../assets/js/vendor/jquery-ui.min.js"></script>
+    <script src="../assets/js/vendor/jquery.appear.js"></script>
+    <script src="../assets/js/plugins/parallax.min.js"></script>
+    <script src="../assets/js/plugins/parallax-scroll.js"></script>
+    <script src="../assets/js/plugins/isotope.pkgd.min.js"></script>
+    <script src="../assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <script src="../assets/js/plugins/gsap.min.js"></script>
+    <script src="../assets/js/plugins/ScrollTrigger.min.js"></script>
+    <script src="../assets/js/plugins/SplitText.js"></script>
+    <script src="../assets/js/plugins/tween-max.min.js"></script>
+    <script src="../assets/js/plugins/draggable.min.js"></script>
+    <script src="../assets/js/plugins/jquery.carouselTicker.js"></script>
+    <script src="../assets/js/vendor/ajax-form.js"></script>
+    <script src="../assets/js/plugins/TextPlugin.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/plugins/magiccursor.js"></script>
+    <script src="../assets/js/image-reveal-hover.js"></script>
+
+    <script src="assets/api.js"></script>
+    <script>
+      (function () {
+        const checkingView = document.getElementById("checking-view");
+        const resultView = document.getElementById("result-view");
+        const noTokenView = document.getElementById("no-token-view");
+        const statusEl = document.getElementById("status");
+        const resultTitle = document.getElementById("result-title");
+        const resultLede = document.getElementById("result-lede");
+        const resultIcon = document.getElementById("result-icon");
+        const ctaBtn = document.getElementById("cta-btn");
+
+        /**
+         * Extracts the verification token from the URL.
+         * Supports two URL shapes:
+         *   /verify-email.html?token=<token>
+         *   /verify-email/<token>
+         */
+        function extractToken() {
+          const params = new URLSearchParams(window.location.search);
+          if (params.get("token")) return params.get("token");
+
+          const parts = window.location.pathname.split("/").filter(Boolean);
+          const last = parts[parts.length - 1];
+          if (last && last !== "verify-email.html") return last;
+
+          return null;
+        }
+
+        /**
+         * Calls the backend GET /api/auth/verify-email/:token endpoint
+         * and updates the UI accordingly.
+         */
+        async function verify(token) {
+          checkingView.style.display = "flex";
+          resultView.style.display = "none";
+
+          try {
+            const data = await getJSON(
+              `/auth/verify-email/${encodeURIComponent(token)}`,
+            );
+            checkingView.style.display = "none";
+            resultView.style.display = "block";
+            resultIcon.className = "admin-verify__icon success";
+            resultIcon.innerHTML = '<i class="fas fa-check-circle"></i>';
+            resultTitle.textContent = "Email Verified";
+            resultLede.textContent =
+              "Your account is active. You can sign in now.";
+            ctaBtn.textContent = "Sign In";
+            ctaBtn.href = "login.html";
+            showStatus(
+              statusEl,
+              "success",
+              data.message || "Email verified successfully.",
+            );
+          } catch (err) {
+            checkingView.style.display = "none";
+            resultView.style.display = "block";
+            resultIcon.className = "admin-verify__icon error";
+            resultIcon.innerHTML = '<i class="fas fa-times-circle"></i>';
+            resultTitle.textContent = "Verification Failed";
+            resultLede.textContent =
+              "This link may have expired or already been used.";
+            ctaBtn.textContent = "Back to Sign In";
+            ctaBtn.href = "login.html";
+            showToast("error", err.message);
+          }
+        }
+
+        // --- On page load, try to extract and verify the token ---
+        const token = extractToken();
+        if (token) {
+          verify(token);
+        } else {
+          checkingView.style.display = "none";
+          noTokenView.style.display = "block";
+        }
+
+        // --- Manual token form handler ---
+        document
+          .getElementById("manual-form")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const manualToken = document
+              .getElementById("manual-token")
+              .value.trim();
+            const manualStatus = document.getElementById("manual-status");
+            if (!manualToken) return;
+
+            try {
+              const data = await getJSON(
+                `/auth/verify-email/${encodeURIComponent(manualToken)}`,
+              );
+              showStatus(
+                manualStatus,
+                "success",
+                data.message || "Email verified successfully.",
+              );
+            } catch (err) {
+              showToast("error", err.message);
+            }
+          });
+      })();
+    </script>
+  </body>
+</html>

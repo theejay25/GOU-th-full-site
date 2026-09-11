@@ -1,0 +1,1311 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Admin Dashboard - GOUNI Teaching Hospital</title>
+    <meta
+      name="description"
+      content="Admin dashboard for GOUNI Teaching Hospital. Manage blog posts and applications."
+    />
+    <meta name="author" content="GOUNITH" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- Place favicon.ico in the root directory -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../assets/imgs/favicon.png"
+    />
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../assets/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/vendor/animate.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins/swiper.min.css" />
+    <link rel="stylesheet" href="../assets/css/vendor/magnific-popup.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/vendor/spacing.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/plugins/odometer-theme-default.css"
+    />
+    <link rel="stylesheet" href="../assets/css/plugins/carouselTicker.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/plugins/image-reveal-hover.css"
+    />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+      /* Dashboard Layout */
+      .admin-dashboard {
+        display: flex;
+        min-height: 100vh;
+        background: #f0f2f5;
+      }
+
+      /* Sidebar */
+      .dashboard-sidebar {
+        width: 270px;
+        background: #1a1a2e;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 1000;
+        transition: transform 0.3s ease;
+      }
+      .dashboard-sidebar .sidebar-brand {
+        padding: 24px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: center;
+      }
+      .dashboard-sidebar .sidebar-brand img {
+        max-width: 80px;
+        margin-bottom: 10px;
+      }
+      .dashboard-sidebar .sidebar-brand h5 {
+        color: #fff;
+        font-size: 15px;
+        margin-bottom: 0;
+        font-weight: 600;
+      }
+      .dashboard-sidebar .sidebar-brand small {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 12px;
+      }
+
+      .sidebar-nav {
+        flex: 1;
+        padding: 20px 0;
+        overflow-y: auto;
+      }
+      .sidebar-nav .nav-section-title {
+        padding: 8px 24px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 600;
+      }
+      .sidebar-nav .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 24px;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        font-size: 15px;
+        font-family: var(--rr-ff-robo), sans-serif;
+        transition: all 0.2s ease;
+        border-left: 3px solid transparent;
+        cursor: pointer;
+      }
+      .sidebar-nav .nav-item:hover,
+      .sidebar-nav .nav-item.active {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        border-left-color: #4a90d9;
+      }
+      .sidebar-nav .nav-item i {
+        width: 20px;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .sidebar-footer {
+        padding: 16px 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .sidebar-footer a {
+        color: rgba(255, 255, 255, 0.6);
+        text-decoration: none;
+        font-size: 14px;
+        font-family: var(--rr-ff-robo), sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: color 0.2s;
+      }
+      .sidebar-footer a:hover {
+        color: #fff;
+      }
+
+      /* Main content */
+      .dashboard-main {
+        flex: 1;
+        margin-left: 270px;
+        padding: 30px;
+        min-height: 100vh;
+      }
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .dashboard-header h2 {
+        margin-bottom: 0;
+        font-size: 24px;
+        color: var(--rr-heading-primary);
+      }
+      .dashboard-header .header-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      /* Stats cards */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .stat-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0px 4px 20px rgba(21, 24, 27, 0.06);
+        border: 1px solid rgba(21, 24, 27, 0.04);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .stat-card .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        flex-shrink: 0;
+      }
+      .stat-card .stat-icon.blue {
+        background: #e8f0fe;
+        color: #1967d2;
+      }
+      .stat-card .stat-icon.green {
+        background: #e6f4ea;
+        color: #137333;
+      }
+      .stat-card .stat-icon.orange {
+        background: #fef7e0;
+        color: #e37400;
+      }
+      .stat-card .stat-icon.purple {
+        background: #f3e8fd;
+        color: #7c2dcc;
+      }
+      .stat-card .stat-info h4 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 2px;
+        color: var(--rr-heading-primary);
+      }
+      .stat-card .stat-info p {
+        margin-bottom: 0;
+        font-size: 13px;
+        color: var(--rr-text-body);
+        font-family: var(--rr-ff-robo), sans-serif;
+      }
+
+      /* Page sections */
+      .dashboard-page {
+        display: none;
+      }
+      .dashboard-page.active {
+        display: block;
+      }
+
+      /* Applicants Table */
+      .table-container {
+        background: #fff;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0px 4px 20px rgba(21, 24, 27, 0.06);
+        border: 1px solid rgba(21, 24, 27, 0.04);
+        overflow-x: auto;
+      }
+      .table-container .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .table-container .table-header h5 {
+        margin-bottom: 0;
+        font-size: 18px;
+      }
+      .table-container table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: var(--rr-ff-robo), sans-serif;
+      }
+      .table-container table th {
+        text-align: left;
+        padding: 12px 16px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--rr-text-body);
+        border-bottom: 2px solid #f0f0f0;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .table-container table td {
+        padding: 14px 16px;
+        font-size: 14px;
+        color: var(--rr-heading-primary);
+        border-bottom: 1px solid #f0f0f0;
+        vertical-align: middle;
+      }
+      .table-container table tr:hover td {
+        background: #f8f9ff;
+      }
+
+      .badge-status {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+      .badge-status.pending {
+        background: #fef7e0;
+        color: #e37400;
+      }
+      .badge-status.reviewed {
+        background: #e8f0fe;
+        color: #1967d2;
+      }
+      .badge-status.accepted {
+        background: #e6f4ea;
+        color: #137333;
+      }
+      .badge-status.rejected {
+        background: #fce8e6;
+        color: #c5221f;
+      }
+
+      .program-badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+      .program-badge.internship {
+        background: #e8f0fe;
+        color: #1967d2;
+      }
+      .program-badge.residency {
+        background: #f3e8fd;
+        color: #7c2dcc;
+      }
+      .program-badge.caregiver {
+        background: #e6f4ea;
+        color: #137333;
+      }
+
+      .action-btn {
+        background: transparent;
+        border: 1px solid rgba(21, 24, 27, 0.12);
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: var(--rr-ff-robo), sans-serif;
+        color: var(--rr-heading-primary);
+      }
+      .action-btn:hover {
+        background: var(--rr-theme-primary);
+        color: #fff;
+        border-color: var(--rr-theme-primary);
+      }
+
+      .filter-bar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .filter-bar select,
+      .filter-bar input {
+        padding: 8px 14px;
+        border: 1px solid rgba(21, 24, 27, 0.12);
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: var(--rr-ff-robo), sans-serif;
+        background: #fff;
+        outline: none;
+        min-width: 140px;
+      }
+      .filter-bar select:focus,
+      .filter-bar input:focus {
+        border-color: var(--rr-theme-primary);
+      }
+
+      .loading-spinner {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--rr-text-body);
+      }
+      .loading-spinner i {
+        font-size: 32px;
+        margin-bottom: 12px;
+        display: block;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--rr-text-body);
+      }
+      .empty-state i {
+        font-size: 48px;
+        margin-bottom: 16px;
+        display: block;
+        color: #ccc;
+      }
+
+      /* Mobile toggle */
+      .sidebar-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        font-size: 24px;
+        color: var(--rr-heading-primary);
+        cursor: pointer;
+      }
+
+      @media (max-width: 991px) {
+        .dashboard-sidebar {
+          transform: translateX(-100%);
+        }
+        .dashboard-sidebar.open {
+          transform: translateX(0);
+        }
+        .dashboard-main {
+          margin-left: 0;
+          padding: 20px;
+        }
+        .sidebar-toggle {
+          display: inline-block;
+        }
+        .overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.4);
+          z-index: 999;
+        }
+        .overlay.show {
+          display: block;
+        }
+      }
+
+      @media (max-width: 575px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+        .dashboard-header h2 {
+          font-size: 20px;
+        }
+        .table-container {
+          padding: 16px;
+        }
+      }
+    </style>
+    <style>
+      /* Toast notification styles */
+      .toast-container {
+        position: fixed; top: 24px; right: 24px; z-index: 99999;
+        display: flex; flex-direction: column; gap: 12px;
+        pointer-events: none; max-width: 100%;
+      }
+      .toast {
+        pointer-events: auto; display: flex; align-items: flex-start; gap: 14px;
+        background: #1a1d23; border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 12px; padding: 16px 20px; min-width: 320px; max-width: 440px;
+        box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+        animation: toastSlideIn 0.35s cubic-bezier(0.16,1,0.3,1);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .toast.removing { opacity: 0; transform: translateX(60px); }
+      .toast__icon { flex: 0 0 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+      .toast--success .toast__icon { background: rgba(34,197,94,0.15); color: #22c55e; }
+      .toast--error .toast__icon { background: rgba(239,68,68,0.15); color: #ef4444; }
+      .toast--info .toast__icon { background: rgba(59,130,246,0.15); color: #3b82f6; }
+      .toast--warning .toast__icon { background: rgba(234,179,8,0.15); color: #eab308; }
+      .toast__body { flex: 1; min-width: 0; }
+      .toast__title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; font-family: sans-serif; }
+      .toast__message { font-size: 14px; font-weight: 500; line-height: 1.5; color: #f1ead9; font-family: sans-serif; word-wrap: break-word; }
+      .toast__close { flex: 0 0 24px; height: 24px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; font-size: 16px; padding: 0; border-radius: 4px; }
+      .toast__close:hover { color: #fff; }
+      @keyframes toastSlideIn { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+      @media (max-width: 520px) { .toast-container { top: 16px; right: 16px; left: 16px; } .toast { min-width: 0; max-width: 100%; padding: 14px 16px; } }
+    </style>
+  </head>
+
+  <body class="body-1">
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <div class="status" id="status"></div>
+
+    <div class="admin-dashboard">
+      <!-- Mobile overlay -->
+      <div class="overlay" id="sidebarOverlay"></div>
+
+      <!-- Sidebar -->
+      <aside class="dashboard-sidebar" id="dashboardSidebar">
+        <div class="sidebar-brand">
+          <img src="../assets/logo.png" alt="GOUNI Teaching Hospital" />
+          <h5>GOUNI Teaching Hospital</h5>
+          <small>Admin Dashboard</small>
+        </div>
+
+        <nav class="sidebar-nav">
+          <div class="nav-section-title">Main Navigation</div>
+
+          <a
+            class="nav-item active"
+            data-page="create-blog"
+            onclick="navigateTo('create-blog')"
+          >
+            <i class="fas fa-pen-fancy"></i>
+            <span>Create Blog</span>
+          </a>
+
+          <a
+            class="nav-item"
+            data-page="manage-applicants"
+            onclick="navigateTo('manage-applicants')"
+          >
+            <i class="fas fa-users"></i>
+            <span>Manage Applicants</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a href="javascript:void(0)" onclick="signOut()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Sign Out</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <main class="dashboard-main">
+        <div class="dashboard-header">
+          <div class="d-flex align-items-center gap-3">
+            <button class="sidebar-toggle" onclick="toggleSidebar()">
+              <i class="fas fa-bars"></i>
+            </button>
+            <h2 id="pageTitle">Create Blog</h2>
+          </div>
+          <div class="header-right">
+            <span
+              style="
+                font-size: 14px;
+                color: var(--rr-text-body);
+                font-family: var(--rr-ff-robo), sans-serif;
+              "
+            >
+              <i class="fas fa-user-circle me-1"></i>
+              <span id="adminEmail">Admin</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Create Blog Page -->
+        <div class="dashboard-page active" id="page-create-blog">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+              <div class="table-container" style="padding: 40px">
+                <div style="text-align: center; padding: 30px 0">
+                  <div
+                    style="
+                      width: 80px;
+                      height: 80px;
+                      border-radius: 50%;
+                      background: #e8f0fe;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      margin: 0 auto 20px;
+                    "
+                  >
+                    <i
+                      class="fas fa-pen-fancy"
+                      style="font-size: 32px; color: #1967d2"
+                    ></i>
+                  </div>
+                  <h4 style="margin-bottom: 8px">Create a New Blog Post</h4>
+                  <p
+                    style="
+                      color: var(--rr-text-body);
+                      font-family: var(--rr-ff-robo), sans-serif;
+                      max-width: 400px;
+                      margin: 0 auto 24px;
+                    "
+                  >
+                    Share highlights and top stories with the GOUNI Teaching
+                    Hospital community.
+                  </p>
+                  <a
+                    href="create-blog.html"
+                    class="rr-btn"
+                    style="display: inline-flex"
+                  >
+                    <span class="btn-wrap">
+                      <span class="text-one"
+                        ><i class="fas fa-plus me-2"></i>Create New Post</span
+                      >
+                      <span class="text-two"
+                        ><i class="fas fa-plus me-2"></i>Create New Post</span
+                      >
+                    </span>
+                  </a>
+                </div>
+
+                <hr style="margin: 30px 0; opacity: 0.1" />
+
+                <div>
+                  <h6 style="margin-bottom: 16px">Recent Blog Posts</h6>
+                  <div id="recentBlogsContainer">
+                    <div class="loading-spinner">
+                      <i class="fas fa-spinner fa-spin"></i>
+                      <p>Loading recent posts...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manage Applicants Page -->
+        <div class="dashboard-page" id="page-manage-applicants">
+          <div class="table-container">
+            <div class="table-header">
+              <h5><i class="fas fa-users me-2"></i>All Applicants</h5>
+              <div class="filter-bar">
+                <select id="programFilter" onchange="filterApplicants()">
+                  <option value="">All Programs</option>
+                  <option value="internship">Internship</option>
+                  <option value="residency">Residency</option>
+                  <option value="caregiver">Caregiver</option>
+                </select>
+                <select id="statusFilter" onchange="filterApplicants()">
+                  <option value="">All Status</option>
+                  <option value="pending">Pending</option>
+                  <option value="reviewed">Reviewed</option>
+                  <option value="accepted">Accepted</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="applicantsContainer">
+              <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading applicants...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Review Application Modal -->
+      <div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                <i class="fas fa-file-alt me-2"></i>Application Details
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div id="reviewModalContent">
+                <div class="text-center py-4">
+                  <i class="fas fa-spinner fa-spin fa-2x"></i>
+                  <p class="mt-2">Loading...</p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer" id="reviewModalFooter">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="markReviewedBtn"
+                onclick="markAsReviewed()"
+              >
+                <i class="fas fa-check-circle me-1"></i>Mark as Reviewed
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Review Modal -->
+    </div>
+
+    <!-- JS here -->
+    <script src="../assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/plugins/waypoints.min.js"></script>
+    <script src="../assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/plugins/meanmenu.min.js"></script>
+    <script src="../assets/js/plugins/odometer.min.js"></script>
+    <script src="../assets/js/plugins/swiper.min.js"></script>
+    <script src="../assets/js/plugins/wow.js"></script>
+    <script src="../assets/js/vendor/magnific-popup.min.js"></script>
+    <script src="../assets/js/vendor/type.js"></script>
+    <script src="../assets/js/plugins/nice-select.min.js"></script>
+    <script src="../assets/js/vendor/jquery-ui.min.js"></script>
+    <script src="../assets/js/vendor/jquery.appear.js"></script>
+    <script src="../assets/js/plugins/parallax.min.js"></script>
+    <script src="../assets/js/plugins/parallax-scroll.js"></script>
+    <script src="../assets/js/plugins/isotope.pkgd.min.js"></script>
+    <script src="../assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <script src="../assets/js/plugins/gsap.min.js"></script>
+    <script src="../assets/js/plugins/ScrollTrigger.min.js"></script>
+    <script src="../assets/js/plugins/SplitText.js"></script>
+    <script src="../assets/js/plugins/tween-max.min.js"></script>
+    <script src="../assets/js/plugins/draggable.min.js"></script>
+    <script src="../assets/js/plugins/jquery.carouselTicker.js"></script>
+    <script src="../assets/js/vendor/ajax-form.js"></script>
+    <script src="../assets/js/plugins/TextPlugin.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/plugins/magiccursor.js"></script>
+    <script src="../assets/js/image-reveal-hover.js"></script>
+
+    <script src="assets/api.js"></script>
+    <script>
+      // ─── Sidebar Toggle ───────────────────────────────────────────
+      function toggleSidebar() {
+        document.getElementById("dashboardSidebar").classList.toggle("open");
+        document.getElementById("sidebarOverlay").classList.toggle("show");
+      }
+
+      document
+        .getElementById("sidebarOverlay")
+        ?.addEventListener("click", function () {
+          document.getElementById("dashboardSidebar").classList.remove("open");
+          this.classList.remove("show");
+        });
+
+      // ─── Navigation ──────────────────────────────────────────────
+      const pageTitles = {
+        "create-blog": "Create Blog",
+        "manage-applicants": "Manage Applicants",
+      };
+
+      function navigateTo(page) {
+        // Update sidebar active state
+        document.querySelectorAll(".sidebar-nav .nav-item").forEach((el) => {
+          el.classList.toggle("active", el.dataset.page === page);
+        });
+
+        // Show/hide pages
+        document.querySelectorAll(".dashboard-page").forEach((el) => {
+          el.classList.toggle("active", el.id === `page-${page}`);
+        });
+
+        // Update title
+        document.getElementById("pageTitle").textContent =
+          pageTitles[page] || "Dashboard";
+
+        // Close mobile sidebar
+        document.getElementById("dashboardSidebar")?.classList.remove("open");
+        document.getElementById("sidebarOverlay")?.classList.remove("show");
+
+        // Load page data
+        if (page === "manage-applicants") {
+          loadApplicants();
+        }
+        if (page === "create-blog") {
+          loadRecentBlogs();
+        }
+      }
+
+      // ─── Sign Out (clears tokens and calls server) ──────────────
+      function signOut() {
+        if (!confirm("Are you sure you want to sign out?")) {
+          return false;
+        }
+        // Clear tokens synchronously FIRST before any async call.
+        // This prevents a race condition where the login page loads and
+        // still sees the token, causing an auto-redirect back to dashboard.
+        const token = localStorage.getItem("accessToken");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        // Navigate away immediately (tokens are already gone)
+        window.location.href = "login.html";
+        // Attempt server-side logout in the background (fire-and-forget)
+        if (token) {
+          fetch(`${API_BASE}/auth/logout`, {
+            method: "POST",
+            headers: { Authorization: `Bearer ${token}` },
+          }).catch(() => {});
+        }
+        return false;
+      }
+
+      // ─── Logout Helper: clears tokens and redirects ────────────
+      function forceLogout() {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        window.location.href = "login.html";
+      }
+
+      // ─── Auth Check (validates token server-side) ──────────────
+      (function () {
+        const token = localStorage.getItem("accessToken");
+        if (!token) {
+          forceLogout();
+          return;
+        }
+
+        // Try to decode user info from JWT (just header is fine for display)
+        try {
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          if (payload.email) {
+            document.getElementById("adminEmail").textContent = payload.email;
+          }
+        } catch (e) {}
+
+        // Validate token by calling the profile endpoint.
+        // If the server returns 401, tokens are invalid/stale — force logout.
+        (async function validateToken() {
+          try {
+            const res = await fetch(`${API_BASE}/auth/profile`, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            if (!res.ok) {
+              throw new Error("Token invalid");
+            }
+          } catch (err) {
+            forceLogout();
+            return;
+          }
+          // Load initial data only after token is confirmed valid
+          loadRecentBlogs();
+        })();
+      })();
+
+      // ─── Recent Blogs ────────────────────────────────────────────
+      async function loadRecentBlogs() {
+        const container = document.getElementById("recentBlogsContainer");
+        try {
+          const data = await getJSON("/blogs?limit=10");
+          if (data.data && data.data.blogs && data.data.blogs.length > 0) {
+            container.innerHTML = data.data.blogs
+              .map(
+                (blog) => `
+                  <div class="d-flex align-items-center justify-content-between py-3 border-bottom" style="border-color: rgba(21,24,27,0.06) !important;">
+                    <div class="d-flex align-items-center gap-3" style="min-width: 0; flex: 1;">
+                      <div
+                        style="
+                          width: 48px;
+                          height: 48px;
+                          border-radius: 8px;
+                          overflow: hidden;
+                          flex-shrink: 0;
+                          background: #f0f0f0;
+                        "
+                      >
+                        ${
+                          blog.image_url
+                            ? `<img src="${blog.image_url}" alt="" style="width:100%;height:100%;object-fit:cover;">`
+                            : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#ccc;"><i class="fas fa-image"></i></div>`
+                        }
+                      </div>
+                      <div style="min-width: 0; flex: 1;">
+                        <h6 style="font-size: 14px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                          ${blog.title}
+                        </h6>
+                        <small style="color: var(--rr-text-body); font-family: var(--rr-ff-robo), sans-serif;">
+                          ${
+                            blog.isPinned
+                              ? '<span style="color:#e37400;"><i class="fas fa-thumbtack"></i> Pinned</span>'
+                              : '<span style="color:#1967d2;">📰 Story</span>'
+                          }
+                          &middot; ${new Date(blog.createdAt).toLocaleDateString()}
+                        </small>
+                      </div>
+                    </div>
+                    <div style="display: flex; gap: 6px; flex-shrink: 0;">
+                      <button class="action-btn" onclick="togglePinBlog('${blog._id}')" title="${blog.isPinned ? "Unpin" : "Pin"}">
+                        <i class="fas fa-thumbtack" style="${blog.isPinned ? "color: #e37400;" : ""}"></i>
+                      </button>
+                      <button class="action-btn" onclick="editBlog('${blog._id}')" title="Edit">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="action-btn" onclick="deleteBlog('${blog._id}')" title="Delete" style="color: #c5221f;">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                `,
+              )
+              .join("");
+          } else {
+            container.innerHTML =
+              '<div class="empty-state"><i class="fas fa-newspaper"></i><p>No blog posts yet.</p></div>';
+          }
+        } catch (err) {
+          container.innerHTML =
+            '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>Could not load recent posts.</p></div>';
+        }
+      }
+
+      // ─── Toggle Pin ────────────────────────────────────────────
+      async function togglePinBlog(id) {
+        if (!confirm("Toggle pin status for this blog post?")) return;
+        const token = localStorage.getItem("accessToken");
+        try {
+          await patchJSON(`/blogs/${id}/pin`, {}, token);
+          showToast("success", "Pin status updated.", "Blog Post");
+          loadRecentBlogs();
+        } catch (err) {
+          showToast("error", err.message, "Failed to Toggle Pin");
+        }
+      }
+
+      // ─── Edit Blog ─────────────────────────────────────────────
+      function editBlog(id) {
+        window.location.href = `edit-blog.html?id=${id}`;
+      }
+
+      // ─── Delete Blog ───────────────────────────────────────────
+      async function deleteBlog(id) {
+        if (
+          !confirm(
+            "Are you sure you want to delete this blog post? This action cannot be undone.",
+          )
+        )
+          return;
+        const token = localStorage.getItem("accessToken");
+        try {
+          await deleteRequest(`/blogs/${id}`, token);
+          showToast("success", "Blog post deleted.", "Delete Blog Post");
+          loadRecentBlogs();
+        } catch (err) {
+          showToast("error", err.message, "Failed to Delete");
+        }
+      }
+
+      // ─── Accept Application ──────────────────────────────────────
+      async function acceptApplication(id) {
+        if (!confirm("Are you sure you want to accept this application?"))
+          return;
+        const token = localStorage.getItem("accessToken");
+        try {
+          await patchJSON(
+            `/applications/${id}/status`,
+            { status: "accepted" },
+            token,
+          );
+          showToast("success", "Application accepted.", "Application");
+          loadApplicants();
+        } catch (err) {
+          showToast("error", err.message, "Failed to Accept");
+        }
+      }
+
+      // ─── Reject Application ──────────────────────────────────────
+      async function rejectApplication(id) {
+        if (!confirm("Are you sure you want to reject this application?"))
+          return;
+        const token = localStorage.getItem("accessToken");
+        try {
+          await patchJSON(
+            `/applications/${id}/status`,
+            { status: "rejected" },
+            token,
+          );
+          showToast("success", "Application rejected.", "Application");
+          loadApplicants();
+        } catch (err) {
+          showToast("error", err.message, "Failed to Reject");
+        }
+      }
+
+      // ─── Delete Application ──────────────────────────────────────
+      async function deleteApplication(id) {
+        if (
+          !confirm(
+            "Are you sure you want to delete this application? This action cannot be undone.",
+          )
+        )
+          return;
+        const token = localStorage.getItem("accessToken");
+        try {
+          await deleteRequest(`/applications/${id}`, token);
+          showToast("success", "Application deleted.", "Delete Application");
+          loadApplicants();
+        } catch (err) {
+          showToast("error", err.message, "Failed to Delete");
+        }
+      }
+
+      // ─── Review Application Modal ────────────────────────────────
+      let currentReviewId = null;
+
+      function openReviewModal(id) {
+        currentReviewId = id;
+        const modal = new bootstrap.Modal(document.getElementById('reviewModal'));
+        const content = document.getElementById('reviewModalContent');
+        const footer = document.getElementById('reviewModalFooter');
+        const markBtn = document.getElementById('markReviewedBtn');
+
+        content.innerHTML = '<div class="text-center py-4"><i class="fas fa-spinner fa-spin fa-2x"></i><p class="mt-2">Loading application details...</p></div>';
+        modal.show();
+
+        const token = localStorage.getItem('accessToken');
+        fetch(`${API_BASE}/applications/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+          .then(res => res.json())
+          .then(result => {
+            if (!result.success) throw new Error(result.message || 'Failed to load');
+            const app = result.data;
+            const programLabels = { internship: 'Internship', residency: 'Residency', caregiver: 'Caregiver' };
+
+            // Build program-specific fields HTML
+            let programFieldsHtml = '';
+
+            // Institution (shared by all programs)
+            if (app.institution) {
+              programFieldsHtml += `
+                <div class="col-sm-6">
+                  <label class="fw-bold text-muted small mb-1">Institution</label>
+                  <p class="mb-0">${app.institution}</p>
+                </div>
+              `;
+            }
+
+            // Internship-specific: letter image
+            if (app.programType === 'internship' && app.letterImage) {
+              programFieldsHtml += `
+                <div class="col-12">
+                  <label class="fw-bold text-muted small mb-1">Cover Letter / Letter of Interest</label>
+                  <p class="mb-0">
+                    <a href="${API_BASE.replace('/api', '')}${app.letterImage}" target="_blank" style="color: var(--rr-theme-primary);" class="d-inline-flex align-items-center gap-1">
+                      <i class="fas fa-file-image"></i> View Uploaded Letter
+                    </a>
+                  </p>
+                </div>
+              `;
+            }
+
+            // Residency-specific fields
+            if (app.programType === 'residency') {
+              if (app.lgaIdentification) {
+                programFieldsHtml += `
+                  <div class="col-sm-6">
+                    <label class="fw-bold text-muted small mb-1">LGA Identification</label>
+                    <p class="mb-0">${app.lgaIdentification}</p>
+                  </div>
+                `;
+              }
+              if (app.dateOfBirth) {
+                programFieldsHtml += `
+                  <div class="col-sm-6">
+                    <label class="fw-bold text-muted small mb-1">Date of Birth</label>
+                    <p class="mb-0">${new Date(app.dateOfBirth).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                  </div>
+                `;
+              }
+              // Residency certificate files
+              const certFields = [
+                { key: 'mbbsCertificate', label: 'MBBS Certificate' },
+                { key: 'nyscCertificate', label: 'NYSC Certificate' },
+                { key: 'medicalCouncilCertificate', label: 'Medical Council Certificate' },
+              ];
+              certFields.forEach(cert => {
+                if (app[cert.key]) {
+                  programFieldsHtml += `
+                    <div class="col-sm-6">
+                      <label class="fw-bold text-muted small mb-1">${cert.label}</label>
+                      <p class="mb-0">
+                        <a href="${API_BASE.replace('/api', '')}${app[cert.key]}" target="_blank" style="color: var(--rr-theme-primary);" class="d-inline-flex align-items-center gap-1">
+                          <i class="fas fa-file-pdf"></i> View Document
+                        </a>
+                      </p>
+                    </div>
+                  `;
+                }
+              });
+            }
+
+            // Caregiver-specific: care letter of intent
+            if (app.programType === 'caregiver' && app.careLetterOfIntent) {
+              programFieldsHtml += `
+                <div class="col-12">
+                  <label class="fw-bold text-muted small mb-1">Care Letter of Intent</label>
+                  <p class="mb-0">
+                    <a href="${API_BASE.replace('/api', '')}${app.careLetterOfIntent}" target="_blank" style="color: var(--rr-theme-primary);" class="d-inline-flex align-items-center gap-1">
+                      <i class="fas fa-file-alt"></i> View Uploaded Letter
+                    </a>
+                  </p>
+                </div>
+              `;
+            }
+
+            // If no program-specific fields were added, insert a placeholder message
+            if (!programFieldsHtml) {
+              programFieldsHtml = '<div class="col-12"><p class="text-muted mb-0 small">No additional program-specific fields provided.</p></div>';
+            }
+
+            content.innerHTML = `
+              <div class="mb-3">
+                <label class="fw-bold text-muted small mb-1">Program Applied For</label>
+                <p class="mb-0 fs-5 fw-semibold">${programLabels[app.programType] || app.programType}</p>
+              </div>
+              <hr>
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <label class="fw-bold text-muted small mb-1">Full Name</label>
+                  <p class="mb-0">${app.fullName}</p>
+                </div>
+                <div class="col-sm-6">
+                  <label class="fw-bold text-muted small mb-1">Email</label>
+                  <p class="mb-0"><a href="mailto:${app.email}" style="color: var(--rr-theme-primary);">${app.email}</a></p>
+                </div>
+                <div class="col-sm-6">
+                  <label class="fw-bold text-muted small mb-1">Phone</label>
+                  <p class="mb-0">${app.phone || '<span class="text-muted">Not provided</span>'}</p>
+                </div>
+                <div class="col-sm-6">
+                  <label class="fw-bold text-muted small mb-1">Date Submitted</label>
+                  <p class="mb-0">${new Date(app.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                </div>
+                ${programFieldsHtml}
+              </div>
+              <hr>
+              <div>
+                <label class="fw-bold text-muted small mb-1">Message / Cover Note</label>
+                <p class="mb-0" style="white-space: pre-wrap; background: #f8f9fa; padding: 12px; border-radius: 8px;">${app.message || '<span class="text-muted">No message provided</span>'}</p>
+              </div>
+              <hr>
+              <div>
+                <label class="fw-bold text-muted small mb-1">Current Status</label>
+                <div><span class="badge-status ${app.status}">${app.status}</span></div>
+              </div>
+            `;
+
+            // Show/hide "Mark as Reviewed" button based on current status
+            if (app.status === 'pending') {
+              markBtn.style.display = 'inline-block';
+            } else {
+              markBtn.style.display = 'none';
+            }
+          })
+          .catch(err => {
+            content.innerHTML = `<div class="text-center py-4"><i class="fas fa-exclamation-circle fa-2x text-danger"></i><p class="mt-2">${err.message}</p></div>`;
+          });
+      }
+
+      async function markAsReviewed() {
+        if (!currentReviewId) return;
+        const token = localStorage.getItem('accessToken');
+        try {
+          await patchJSON(`/applications/${currentReviewId}/status`, { status: 'reviewed' }, token);
+          const modal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+          modal.hide();
+          loadApplicants();
+        } catch (err) {
+          alert('Failed to mark as reviewed: ' + err.message);
+        }
+      }
+
+      // ─── Applicants ──────────────────────────────────────────────
+      let allApplicants = [];
+
+      async function loadApplicants() {
+        const container = document.getElementById("applicantsContainer");
+        container.innerHTML =
+          '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>Loading applicants...</p></div>';
+
+        try {
+          const token = localStorage.getItem("accessToken");
+          const res = await fetch("http://localhost:5000/api/applications", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const result = await res.json();
+
+          if (!res.ok) {
+            throw new Error(result.message || "Failed to load applicants");
+          }
+
+          if (result.data && result.data.applications) {
+            allApplicants = result.data.applications;
+            renderApplicants(allApplicants);
+          } else {
+            container.innerHTML =
+              '<div class="empty-state"><i class="fas fa-users"></i><p>No applicants found.</p></div>';
+          }
+        } catch (err) {
+          container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>${err.message}</p></div>`;
+        }
+      }
+
+      function filterApplicants() {
+        const program = document.getElementById("programFilter").value;
+        const status = document.getElementById("statusFilter").value;
+
+        let filtered = allApplicants;
+        if (program) {
+          filtered = filtered.filter((a) => a.programType === program);
+        }
+        if (status) {
+          filtered = filtered.filter((a) => a.status === status);
+        }
+        renderApplicants(filtered);
+      }
+
+      function renderApplicants(applicants) {
+        const container = document.getElementById("applicantsContainer");
+
+        if (!applicants || applicants.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state"><i class="fas fa-inbox"></i><p>No applicants match your filters.</p></div>';
+          return;
+        }
+
+        const programLabels = {
+          internship: "Internship",
+          residency: "Residency",
+          caregiver: "Caregiver",
+        };
+
+        container.innerHTML = `
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Program</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${applicants
+                  .map(
+                    (app) => `
+                  <tr>
+                    <td>
+                      <a href="javascript:void(0)" onclick="openReviewModal('${app._id}')" style="color: var(--rr-theme-primary); text-decoration: none; font-weight: 600; cursor: pointer;" title="Click to review this application">
+                        ${app.fullName} <i class="fas fa-external-link-alt" style="font-size: 10px; opacity: 0.6;"></i>
+                      </a>
+                    </td>
+                    <td>
+                      <a href="mailto:${app.email}" style="color: var(--rr-text-body); text-decoration: none;">
+                        ${app.email}
+                      </a>
+                      ${
+                        app.phone
+                          ? `<br><small style="color: var(--rr-text-body);">${app.phone}</small>`
+                          : ""
+                      }
+                    </td>
+                    <td>
+                      <span class="program-badge ${app.programType}">
+                        ${programLabels[app.programType] || app.programType}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge-status ${app.status}">${app.status}</span>
+                    </td>
+                    <td style="white-space: nowrap; font-size: 13px; color: var(--rr-text-body);">
+                      <i class="far fa-calendar me-1"></i>
+                      ${new Date(app.createdAt).toLocaleDateString()}
+                    </td>
+                    <td>
+                      <div style="display: flex; gap: 6px; flex-wrap: nowrap;">
+                        ${
+                          app.status === "pending"
+                            ? `
+                          <button class="action-btn" onclick="openReviewModal('${app._id}')" title="Review" style="color: #1967d2; border-color: #1967d2;">
+                            <i class="fas fa-search"></i> Review
+                          </button>
+                          <button class="action-btn" onclick="acceptApplication('${app._id}')" title="Accept" style="color: #137333; border-color: #137333;">
+                            <i class="fas fa-check"></i> Accept
+                          </button>
+                          <button class="action-btn" onclick="rejectApplication('${app._id}')" title="Reject" style="color: #c5221f; border-color: #c5221f;">
+                            <i class="fas fa-times"></i> Reject
+                          </button>
+                        `
+                            : app.status === "reviewed"
+                            ? `
+                          <button class="action-btn" onclick="acceptApplication('${app._id}')" title="Accept" style="color: #137333; border-color: #137333;">
+                            <i class="fas fa-check"></i> Accept
+                          </button>
+                          <button class="action-btn" onclick="rejectApplication('${app._id}')" title="Reject" style="color: #c5221f; border-color: #c5221f;">
+                            <i class="fas fa-times"></i> Reject
+                          </button>
+                        `
+                            : `
+                          <button class="action-btn" onclick="deleteApplication('${app._id}')" title="Delete" style="color: #c5221f; border-color: #c5221f;">
+                            <i class="fas fa-trash"></i> Delete
+                          </button>
+                        `
+                        }
+                      </div>
+                    </td>
+                  </tr>
+                `,
+                  )
+                  .join("")}
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top: 16px; font-size: 13px; color: var(--rr-text-body); font-family: var(--rr-ff-robo), sans-serif;">
+            Showing <strong>${applicants.length}</strong> applicant${applicants.length !== 1 ? "s" : ""}
+          </div>
+        `;
+      }
+    </script>
+  </body>
+</html>

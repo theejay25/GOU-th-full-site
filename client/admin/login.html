@@ -1,0 +1,439 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Admin Login - GOUNI Teaching Hospital</title>
+    <meta
+      name="description"
+      content="Admin login page for GOUNI Teaching Hospital portal. Sign in to manage hospital content and services."
+    />
+    <meta name="author" content="GOUNITH" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://www.gounith.org/admin/login.html" />
+    <!-- Place favicon.ico in the root directory -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../assets/imgs/favicon.png"
+    />
+    <!-- CSS here -->
+    <link rel="stylesheet" href="../assets/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/vendor/animate.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins/swiper.min.css" />
+    <link rel="stylesheet" href="../assets/css/vendor/magnific-popup.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/vendor/spacing.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/plugins/odometer-theme-default.css"
+    />
+    <link rel="stylesheet" href="../assets/css/plugins/carouselTicker.css" />
+    <link
+      rel="stylesheet"
+      href="../assets/css/plugins/image-reveal-hover.css"
+    />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <style>
+      /* Admin-specific styles */
+      .admin-login__card {
+        max-width: 480px;
+        margin: 0 auto;
+        background: var(--rr-common-white);
+        border-radius: 12px;
+        padding: 50px 45px;
+        box-shadow: 0px 10px 40px rgba(21, 24, 27, 0.08);
+        border: 1px solid rgba(21, 24, 27, 0.06);
+      }
+      @media (max-width: 575px) {
+        .admin-login__card {
+          padding: 30px 20px;
+        }
+      }
+      .admin-login__card .rr-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .admin-login__card .get-in-touch__form-input {
+        margin-bottom: 20px;
+      }
+      .admin-login__card .get-in-touch__form-input input {
+        background: #f8f8f8;
+        border: 1px solid transparent;
+      }
+      .admin-login__card .get-in-touch__form-input input:focus {
+        border-color: var(--rr-theme-primary);
+        background: #fff;
+      }
+      .admin-login__divider {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin: 30px 0 20px;
+      }
+      .admin-login__divider::before,
+      .admin-login__divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(21, 24, 27, 0.1);
+      }
+      .admin-login__divider span {
+        font-family: var(--rr-ff-robo);
+        font-size: 14px;
+        color: var(--rr-text-body);
+        white-space: nowrap;
+      }
+      .admin-login__register-link {
+        text-align: center;
+        margin-top: 25px;
+        font-family: var(--rr-ff-robo);
+        font-size: 16px;
+        color: var(--rr-text-body);
+      }
+      .admin-login__register-link a {
+        color: var(--rr-theme-primary);
+        font-weight: 600;
+      }
+      .admin-login__register-link a:hover {
+        color: var(--rr-heading-primary);
+        text-decoration: underline;
+      }
+      .admin-login__forgot-link {
+        text-align: right;
+        margin-bottom: 20px;
+        font-family: var(--rr-ff-robo);
+        font-size: 14px;
+      }
+      .admin-login__forgot-link a {
+        color: var(--rr-theme-primary);
+      }
+      .admin-login__forgot-link a:hover {
+        color: var(--rr-heading-primary);
+        text-decoration: underline;
+      }
+      .admin-login__logo {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .admin-login__logo img {
+        max-width: 120px;
+      }
+      .admin-login__title {
+        text-align: center;
+        margin-bottom: 8px;
+      }
+      .admin-login__subtitle {
+        text-align: center;
+        font-family: var(--rr-ff-robo);
+        font-size: 16px;
+        color: var(--rr-text-body);
+        margin-bottom: 30px;
+      }
+      .password-wrapper {
+        position: relative;
+      }
+      .password-wrapper .toggle-password {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: var(--rr-text-body);
+        font-size: 18px;
+        background: transparent;
+        border: none;
+        padding: 0;
+        z-index: 2;
+      }
+      .password-wrapper .toggle-password:hover {
+        color: var(--rr-theme-primary);
+      }
+      /* Toast notification styles */
+      .toast-container { position: fixed; top: 24px; right: 24px; z-index: 99999; display: flex; flex-direction: column; gap: 12px; pointer-events: none; max-width: 100%; }
+      .toast { pointer-events: auto; display: flex; align-items: flex-start; gap: 14px; background: #1a1d23; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px 20px; min-width: 320px; max-width: 440px; box-shadow: 0 12px 48px rgba(0,0,0,0.35); animation: toastSlideIn 0.35s cubic-bezier(0.16,1,0.3,1); transition: opacity 0.3s ease, transform 0.3s ease; }
+      .toast.removing { opacity: 0; transform: translateX(60px); }
+      .toast--success .toast__icon { background: rgba(34,197,94,0.15); color: #22c55e; }
+      .toast--error .toast__icon { background: rgba(239,68,68,0.15); color: #ef4444; }
+      .toast--info .toast__icon { background: rgba(59,130,246,0.15); color: #3b82f6; }
+      .toast--warning .toast__icon { background: rgba(234,179,8,0.15); color: #eab308; }
+      .toast__icon { flex: 0 0 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
+      .toast__body { flex: 1; min-width: 0; }
+      .toast__title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; font-family: sans-serif; }
+      .toast__message { font-size: 14px; font-weight: 500; line-height: 1.5; color: #f1ead9; font-family: sans-serif; word-wrap: break-word; }
+      .toast__close { flex: 0 0 24px; height: 24px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: rgba(255,255,255,0.4); cursor: pointer; font-size: 16px; padding: 0; border-radius: 4px; }
+      .toast__close:hover { color: #fff; }
+      @keyframes toastSlideIn { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+      @media (max-width: 520px) { .toast-container { top: 16px; right: 16px; left: 16px; } .toast { min-width: 0; max-width: 100%; padding: 14px 16px; } }
+          </style>
+  </head>
+
+  <body class="body-1">
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- preloader start -->
+    <!-- style 1 -->
+    <div class="status" id="status"></div>
+    <div id="preloader" data-preloader="active" data-loaded="doted">
+      <div class="preloader-close">x</div>
+      <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
+    </div>
+
+    <!-- style 2 -->
+    <div class="preloader" data-preloader="deactive" data-loaded="progress">
+      <div class="preloader-close">x</div>
+      <div class="wrapper w-100 text-center">
+        <div id="progress-bar" class="preloader-text" data-text="SOMA"></div>
+        <div class="progress-bar">
+          <div class="progress"></div>
+        </div>
+      </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- preloader start -->
+    <div class="loading-form">
+      <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- Backtotop start -->
+    <div id="scroll-percentage">
+      <span id="scroll-percentage-value"></span>
+    </div>
+    <!-- Backtotop end -->
+
+    <!-- cursorAnimation start -->
+    <div class="cursor-wrapper relative">
+      <div class="cursor"></div>
+      <div class="cursor-follower"></div>
+    </div>
+    <!-- cursorAnimation end -->
+
+    <main>
+      <!-- Admin Login area start -->
+      <div class="admin-login__wrapper">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="admin-login__card">
+                <div class="admin-login__logo">
+                  <img src="../assets/logo.png" alt="GOUNI Teaching Hospital" />
+                </div>
+                <h3 class="admin-login__title">Admin Login</h3>
+                <p class="admin-login__subtitle">
+                  Sign in to manage hospital content and services
+                </p>
+
+                <form id="login-form" novalidate>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="get-in-touch__form-input">
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          placeholder="Email Address *"
+                          autocapitalize="off"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="get-in-touch__form-input">
+                        <div class="password-wrapper">
+                          <input
+                            type="password"
+                            name="password"
+                            id="loginPassword"
+                            placeholder="Password *"
+                            required
+                          />
+                          <button
+                            type="button"
+                            class="toggle-password"
+                            id="submit-btn"
+                            onclick="
+                              togglePasswordVisibility('loginPassword', this)
+                            "
+                            title="Toggle password visibility"
+                            aria-label="Toggle password visibility"
+                          >
+                            <i class="far fa-eye"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="admin-login__forgot-link">
+                        <a href="forgot-password.html">Forgot Password?</a>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="rr-btn">
+                        <span class="btn-wrap">
+                          <span class="text-one">Sign In</span>
+                          <span class="text-two">Sign In</span>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="admin-login__divider">
+                  <span>OR</span>
+                </div>
+
+                <div class="admin-login__register-link">
+                  Don't have an account?
+                  <a href="register.html">Register here</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Admin Login area end -->
+    </main>
+
+    <!-- JS here -->
+    <script src="../assets/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="../assets/js/plugins/waypoints.min.js"></script>
+    <script src="../assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/plugins/meanmenu.min.js"></script>
+    <script src="../assets/js/plugins/odometer.min.js"></script>
+    <script src="../assets/js/plugins/swiper.min.js"></script>
+    <script src="../assets/js/plugins/wow.js"></script>
+    <script src="../assets/js/vendor/magnific-popup.min.js"></script>
+    <script src="../assets/js/vendor/type.js"></script>
+    <script src="../assets/js/plugins/nice-select.min.js"></script>
+    <script src="../assets/js/vendor/jquery-ui.min.js"></script>
+    <script src="../assets/js/vendor/jquery.appear.js"></script>
+    <script src="../assets/js/plugins/parallax.min.js"></script>
+    <script src="../assets/js/plugins/parallax-scroll.js"></script>
+    <script src="../assets/js/plugins/isotope.pkgd.min.js"></script>
+    <script src="../assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <script src="../assets/js/plugins/gsap.min.js"></script>
+    <script src="../assets/js/plugins/ScrollTrigger.min.js"></script>
+    <script src="../assets/js/plugins/SplitText.js"></script>
+    <script src="../assets/js/plugins/tween-max.min.js"></script>
+    <script src="../assets/js/plugins/draggable.min.js"></script>
+    <script src="../assets/js/plugins/jquery.carouselTicker.js"></script>
+    <script src="../assets/js/vendor/ajax-form.js"></script>
+    <script src="../assets/js/plugins/TextPlugin.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/plugins/magiccursor.js"></script>
+    <script src="../assets/js/image-reveal-hover.js"></script>
+
+    <script src="assets/api.js"></script>
+    <script>
+      // ─── Redirect to dashboard if already authenticated ─────────
+      (function () {
+        const token = localStorage.getItem("accessToken");
+        if (token) {
+          // Verify token is still valid by checking with the server
+          (async function () {
+            try {
+              const res = await fetch(`${API_BASE}/auth/profile`, {
+                headers: { Authorization: `Bearer ${token}` },
+              });
+              if (res.ok) {
+                // Token is valid, redirect to dashboard
+                window.location.href = "dashboard.html";
+              } else {
+                // Token invalid/expired, clean up
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+              }
+            } catch (e) {
+              // Server unreachable, token might still be valid locally
+              // We'll check JWT expiry client-side as a fallback
+              try {
+                const payload = JSON.parse(atob(token.split(".")[1]));
+                if (payload.exp * 1000 > Date.now()) {
+                  window.location.href = "dashboard.html";
+                } else {
+                  localStorage.removeItem("accessToken");
+                  localStorage.removeItem("refreshToken");
+                }
+              } catch (e2) {
+                // Malformed token, clean up
+                localStorage.removeItem("accessToken");
+                localStorage.removeItem("refreshToken");
+              }
+            }
+          })();
+        }
+      })();
+
+      // Toggle password visibility
+      function togglePasswordVisibility(inputId, btn) {
+        const input = document.getElementById(inputId);
+        const icon = btn.querySelector("i");
+        if (input.type === "password") {
+          input.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        } else {
+          input.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+        }
+      }
+
+      const form = document.getElementById("login-form");
+      const submitBtn = form.querySelector(".rr-btn");
+      const statusEl = document.getElementById("status");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.querySelector(".text-one").textContent = "Signing in...";
+        submitBtn.querySelector(".text-two").textContent = "Signing in...";
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        try {
+const data = await postJSON("/auth/login", { email, password });
+          // Store tokens for authenticated requests
+          localStorage.setItem("accessToken", data.data.accessToken);
+          localStorage.setItem("refreshToken", data.data.refreshToken);
+          const successMsg = data.message || "Logged in successfully.";
+          showToast("success", successMsg);
+          alert(successMsg);
+          submitBtn.querySelector(".text-one").textContent = "Signed in";
+          submitBtn.querySelector(".text-two").textContent = "Signed in";
+          // Redirect to dashboard after short delay
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 1200);
+        } catch (err) {
+          showToast("error", err.message);
+          alert(err.message);
+          submitBtn.disabled = false;
+          submitBtn.querySelector(".text-one").textContent = "Sign In";
+          submitBtn.querySelector(".text-two").textContent = "Sign In";
+        }
+      });
+    </script>
+  </body>
+</html>
