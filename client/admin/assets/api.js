@@ -1,5 +1,5 @@
 // Change this if your backend runs somewhere other than localhost:5000
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "https://gou-th-full-site.vercel.app";
 
 async function postJSON(path, body, token) {
   const headers = { "Content-Type": "application/json" };
